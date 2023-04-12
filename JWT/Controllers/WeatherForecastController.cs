@@ -1,4 +1,5 @@
 using JWT.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWT.Controllers
@@ -19,6 +20,7 @@ namespace JWT.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "User")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
