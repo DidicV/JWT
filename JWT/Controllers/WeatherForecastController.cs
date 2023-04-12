@@ -1,3 +1,4 @@
+using JWT.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWT.Controllers
