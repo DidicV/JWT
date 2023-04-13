@@ -1,5 +1,7 @@
 ﻿using JWT.DTO;
 using JWT.Model;
+using JWT.Service.Implementations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,10 +16,19 @@ namespace JWT.Controllers
     {
         public static User user = new();
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
-        public AccountController(IConfiguration configuration)
+        public AccountController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult<string> GetMe() 
+        {
+            return _userService.GetMyName();
         }
 
         [HttpPost("register")]
